@@ -127,12 +127,12 @@ if file!=None:
       if file_extension=="xlsx" and column_name!="":
           df=pd.read_excel(file)
           df_text="".join(df[column_name.strip()].values)
-          with open("df_text.txt") as f:
+          with open("df_text.txt","w") as f:
               f.write(df_text)
       if file_extension=="csv" and column_name!="":
           df=pd.read_csv(file)
           df_text="".join(df[column_name.strip()].values)
-          with open("df_text.txt") as f:
+          with open("df_text.txt","w") as f:
               f.write(df_text)
   
       with open("df_text.txt") as f:
