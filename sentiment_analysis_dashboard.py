@@ -236,7 +236,7 @@ if st.button("Analyze"):
     with col2:
         st.subtitle("Tone")
         st.write(text_metrics["Tone"])
-        st.subtitle(""Coherence Score")
+        st.subtitle("Coherence Score")
         st.write(text_metrics["Coherence"])
         st.subtitle("Coherence")
         st.write(text_metrics["Coherence"])
