@@ -29,6 +29,18 @@ def get_meta_desc(text):
     if "Description" in i:
       return i
 
+def get_ner(text):
+  prompt = f"""
+  You will receive the text which contains caribean english words. analyze it carefully. Return me the NER if there any in the text in form of dictionary without any explation \
+  and extra text.\
+  #Entities to target: PPERSON, LOCATION, ORGANIZATION, DATE, TIME, PERCENT, MONEY, QUANTITY, ORDINAL, CARDINAL \
+  #output format: {{"word":"entity_label"}}
+  here is the text: {text}
+  """
+  return prompt
+
+
+
 def get_emotion_polarity(text):
   prompt = f"""
   You will receive the text which contains caribean english words. analyze it carefully. Return me the emtion dictionary with emotion and polarity score without any explation \
@@ -145,7 +157,32 @@ if st.button("Analyze"):
         ax.axis("off")  # Hide axes
         ax.set_title("Word Cloud Visualization", fontsize=16, color="blue")
         st.pyplot(fig)
+    
+    with col2:
 
+# Create a Seaborn bar plot
+        sns.set(style="whitegrid")
+        fig, ax = plt.subplots(figsize=(7, 5))
+        # sns.barplot(x=emotion.keys(), y=emotion.values(),hue=emotion.keys(),ax=ax)
+        # plt.title("Emotion Analysis")
+        # plt.xticks(rotation=90)
+        ner=llm.invoke(get_ner(caribbean_story)).content
+        ner=ast.literal_eval(ner)
+    
+        # Convert the ner dictionary to a Pandas DataFrame for long-form data
+        ner_df = pd.DataFrame({'entity_label': list(ner.values())})
+        
+        # Now, use the 'entity_label' column for both x and hue
+        sns.countplot(x='entity_label', hue='entity_label', data=ner_df,ax=ax)
+ 
+        ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
+        # plt.show()
+        ax.set_title("NER Analysis")
+        # Display in Streamlit
+        st.pyplot(fig)
+
+        
+    
 
 
 
