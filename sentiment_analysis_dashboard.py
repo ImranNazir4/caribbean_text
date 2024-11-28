@@ -100,12 +100,12 @@ if st.button("Analyze"):
     # res=llm.invoke(get_sentiment_polarity(text)).content
     # st.write(res)
 
-    emotion=llm.invoke(get_emotion_polarity(caribbean_story)).content
-emotion=ast.literal_eval(emotion)
-
-sns.barplot(x=res.keys(), y=res.values(),hue=res.keys())
-plt.xticks(rotation=90)
-plt.show()
+    emotion=llm.invoke(get_emotion_polarity(text)).content
+    emotion=ast.literal_eval(emotion)
+    
+    sns.barplot(x=res.keys(), y=res.values(),hue=res.keys())
+    plt.xticks(rotation=90)
+    plt.show()
 
 
 
