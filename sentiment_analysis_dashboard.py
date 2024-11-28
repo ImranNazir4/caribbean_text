@@ -11,7 +11,6 @@ from nltk.corpus import stopwords
 from wordcloud import WordCloud
 from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_huggingface import HuggingFaceEmbeddings
 import matplotlib.pyplot as plt
 from langchain_community.document_loaders import TextLoader
 
