@@ -103,10 +103,19 @@ if st.button("Analyze"):
 
     emotion=llm.invoke(get_emotion_polarity(text)).content
     emotion=ast.literal_eval(emotion)
-    
-    sns.barplot(x=emotion.keys(), y=emotion.values(),hue=emotion.keys())
-    plt.xticks(rotation=90)
-    plt.show()
+
+
+    # Create a Seaborn bar plot
+    sns.set(style="whitegrid")
+    fig, ax = plt.subplots()
+    sns.barplot(x=emotion.keys(), y=emotion.values(),hue=emotion.keys(),ax=ax)
+    plt.title("Emotion Analysis")
+    # plt.xticks(rotation=90)
+    # plt.show()
+    ax.set_title("Emotion Analysis")
+
+    # Display in Streamlit
+    st.pyplot(fig)
 
 
 
