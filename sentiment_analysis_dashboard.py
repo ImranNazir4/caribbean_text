@@ -149,7 +149,7 @@ if st.button("Analyze"):
     with col1:
 
         # Generate word cloud
-        wordcloud = WordCloud(width=800, height=670, background_color='white',stopwords=stop_words).generate(text)
+        wordcloud = WordCloud(width=800, height=665, background_color='white',stopwords=stop_words).generate(text)
         
         # Display word cloud using Matplotlib
         fig, ax = plt.subplots(figsize=(10, 5))
