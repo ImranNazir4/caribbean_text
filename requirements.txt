@@ -1,3 +1,4 @@
+torch
 openpyxl
 python-dotenv
 langchain-groq
