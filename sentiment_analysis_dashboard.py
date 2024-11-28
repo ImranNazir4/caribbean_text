@@ -98,25 +98,40 @@ if st.button("Analyze"):
     # polarity=pipe(text)[0]["score"]
 
     # st.write(polarity)
-    # res=llm.invoke(get_sentiment_polarity(text)).content
+    sentiment=llm.invoke(get_sentiment_polarity(text)).content
+    sentiment=ast.literal_eval(sentiment)
     # st.write(res)
 
     emotion=llm.invoke(get_emotion_polarity(text)).content
     emotion=ast.literal_eval(emotion)
 
+    col1,col2=st.columns(2)
 
-    # Create a Seaborn bar plot
-    sns.set(style="whitegrid")
-    fig, ax = plt.subplots()
-    sns.barplot(x=emotion.keys(), y=emotion.values(),hue=emotion.keys(),ax=ax)
-    plt.title("Emotion Analysis")
-    # plt.xticks(rotation=90)
-    ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
-    # plt.show()
-    ax.set_title("Emotion Analysis")
-
-    # Display in Streamlit
-    st.pyplot(fig)
+    with col1:
+        # Create a Seaborn bar plot
+        sns.set(style="whitegrid")
+        fig, ax = plt.subplots()
+        sns.barplot(x=sentiment.keys(), y=sentiment.values(),hue=sentiment.keys(),ax=ax)
+        plt.title("Sentiment Analysis")
+        # plt.xticks(rotation=90)
+        # ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
+        # plt.show()
+        ax.set_title("Sentiment Analysis")
+        # Display in Streamlit
+        st.pyplot(fig)
+   
+    with col2:
+        # Create a Seaborn bar plot
+        sns.set(style="whitegrid")
+        fig, ax = plt.subplots()
+        sns.barplot(x=emotion.keys(), y=emotion.values(),hue=emotion.keys(),ax=ax)
+        plt.title("Emotion Analysis")
+        # plt.xticks(rotation=90)
+        ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
+        # plt.show()
+        ax.set_title("Emotion Analysis")
+        # Display in Streamlit
+        st.pyplot(fig)
 
 
 
