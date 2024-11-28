@@ -156,6 +156,8 @@ if file!=None:
     # len(text_chunks)
   
   if file_extension=="pdf":
+      with open(file.name, mode='wb') as w:
+        w.write(file.getvalue())
       loader=PyPDFLoader(file.name)
       data = loader.load()
       # # split the extracted data into text chunks using the text_splitter, which splits the text based on the specified number of characters and overlap
