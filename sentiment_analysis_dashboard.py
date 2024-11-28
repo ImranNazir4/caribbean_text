@@ -116,9 +116,10 @@ st.title("Caribbean Text Sentiment Analysis System")
 
 file=st.file_uploader("Upload File",["csv","xlsx","pdf","txt"])
 
-# st.write(file.name)
-file_name=file.name
-file_extenstion=file_name.split(".")[-1]
+if file!=None:
+  # st.write(file.name)
+  file_name=file.name
+  file_extenstion=file_name.split(".")[-1]
 
 if file_extension=="xlsx" or file_extension=="csv":
     column_name=st.text_input("Write column name which contains the Text")
