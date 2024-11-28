@@ -5,6 +5,8 @@ import streamlit as st
 from transformers import pipeline
 from dotenv import load_dotenv
 
+# Load environment variables
+load_dotenv()
 
 def get_meta_title(text):
     return text.split("\n")[0]
