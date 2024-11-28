@@ -6,6 +6,7 @@ import streamlit as st
 from transformers import pipeline
 from dotenv import load_dotenv
 import nltk
+import seaborn as sns
 from nltk.corpus import stopwords
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
