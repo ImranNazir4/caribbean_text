@@ -234,6 +234,7 @@ if st.button("Analyze"):
         st.pyplot(fig)
 
     with col2:
+        st.title("Additional Text Metrics") 
         st.subheader("Tone")
         st.write(text_metrics["Tone"])
         st.subheader("Coherence Score")
