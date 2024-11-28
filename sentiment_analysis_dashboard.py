@@ -166,7 +166,7 @@ if st.button("Analyze"):
         # sns.barplot(x=emotion.keys(), y=emotion.values(),hue=emotion.keys(),ax=ax)
         # plt.title("Emotion Analysis")
         # plt.xticks(rotation=90)
-        ner=llm.invoke(get_ner(caribbean_story)).content
+        ner=llm.invoke(get_ner(text)).content
         ner=ast.literal_eval(ner)
     
         # Convert the ner dictionary to a Pandas DataFrame for long-form data
