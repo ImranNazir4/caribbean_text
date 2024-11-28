@@ -3,7 +3,7 @@ import pandas as pd
 import re
 import streamlit as st
 from transformers import pipeline
-
+from dotenv import load_dotenv
 
 
 def get_meta_title(text):
@@ -59,6 +59,16 @@ def get_product_type(text):
     return splits[1]
   else:
     return splits[0]
+
+groq_api_key = os.getenv("GROQ_API_KEY")
+from langchain_groq import ChatGroq
+
+llm = ChatGroq(
+    temperature=0,
+    model="llama-3.1-70b-versatile",
+    api_key=groq_api_key
+)
+
 
 st.title("Caribbean Text Sentiment Analysis System")
 
