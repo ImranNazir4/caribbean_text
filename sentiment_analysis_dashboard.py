@@ -80,6 +80,38 @@ def get_sentiment_polarity(text):
   """
   return prompt
 
+
+def get_text_metrics(text):
+  prompt = f"""
+  You will receive the text which contains caribean english words. analyze it carefully. Return me the following information in dictionary without any explation \
+  and extra text.\
+
+  1. **Number of Tokens:** Calculate the total number of tokens in the text.  
+  2. **Readability Score:** Assess the readability of the text using common metrics like the Flesch Reading Ease score and/or any other suitable readability metric. Provide the score only.  
+  3. **Quality Score:** Evaluate the overall quality of the text on a scale of 1 to 10, considering factors like grammar, vocabulary richness, and clarity. Provide reasons for your rating.  
+  4. **Tone:** Identify the tone of the text (e.g., formal, conversational, persuasive, neutral) and explain your reasoning.  
+  5. **Coherence:** Assess how coherent the text is in presenting its ideas and maintaining logical flow. Provide a coherence score on a scale of 1 to 10, with an explanation.  
+  6. **Intentions:** Analyze the underlying intentions or purposes of the text (e.g., to inform, persuade, entertain, or a combination of these).  
+
+
+  #output format: {{
+    "Number of Tokens": "score",
+    "Readability Score": "score",
+    "Quality Score": "score",
+    "Tone": "value",
+    "Coherence": "value",
+    "Intentions": "value",
+    }} \
+  here is the text: {text}
+  """
+  return prompt
+
+
+
+
+
+
+
 def get_product_type(text):
   splits=text.split("Output:")
   if len(splits)>1:
@@ -160,7 +192,7 @@ if st.button("Analyze"):
     
     with col2:
 
-# Create a Seaborn bar plot
+        # Create a Seaborn bar plot
         sns.set(style="whitegrid")
         fig, ax = plt.subplots(figsize=(7, 5))
         # sns.barplot(x=emotion.keys(), y=emotion.values(),hue=emotion.keys(),ax=ax)
@@ -180,6 +212,36 @@ if st.button("Analyze"):
         ax.set_title("NER Analysis")
         # Display in Streamlit
         st.pyplot(fig)
+
+
+    col1,col2=st.columns(2)
+    with col1:
+        text_metrics=llm.invoke(get_text_metrics(text)).content
+        text_metrics=ast.literal_eval(text_metrics)
+        metrics_names=[]
+        metrics_values=[]
+        for i in ["Readability Score","Quality Score","Coherence"]:
+          metrics_values.append(text_metrics[i])
+          metrics_names.append(i)
+            
+        sns.set(style="whitegrid")
+        fig, ax = plt.subplots(figsize=(7, 5))
+        sns.barplot(x=metrics_names,y=metrics_values,hue=metrics_names,ax=ax)
+        ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
+        # plt.show()
+        ax.set_title("Text Metrics")
+        # Display in Streamlit
+        st.pyplot(fig)
+
+    with col2:
+        st.subtitle("Tone")
+        st.write(text_metrics["Tone"])
+        st.subtitle(""Coherence Score")
+        st.write(text_metrics["Coherence"])
+        st.subtitle("Coherence")
+        st.write(text_metrics["Coherence"])
+
+
 
         
     
