@@ -2,7 +2,7 @@ import os
 import pandas as pd
 import re
 import streamlit as st
-
+from transformers import pipeline
 
 
 
@@ -14,6 +14,44 @@ def get_meta_desc(text):
     if "Description" in i:
       return i
 
+def get_emotion_polarity(text):
+  prompt = f"""
+  You will receive the text which contains caribean english words. analyze it carefully. Return me the emtion dictionary with emotion and polarity score without any explation \
+  and extra text.\
+  #output format: {{
+    "Happiness": "A state of well-being and contentment.",
+    "Sadness": "A feeling of sorrow or unhappiness.",
+    "Anger": "A strong feeling of displeasure or hostility.",
+    "Fear": "An emotional response to a perceived threat or danger.",
+    "Surprise": "A sudden feeling of astonishment or wonder.",
+    "Disgust": "A strong feeling of dislike or disapproval.",
+    "Joy": "A feeling of great pleasure and happiness.",
+    "Guilt": "A feeling of responsibility or remorse for a perceived wrongdoing.",
+    "Shame": "A painful feeling regarding one's own actions or behavior.",
+    "Confusion": "A state of being perplexed or unclear in one's mind.",
+    "Gratitude": "A feeling of thankfulness and appreciation.",
+    "Regret": "A feeling of sorrow or disappointment over something that has happened.",
+    "Relief": "A feeling of reassurance and relaxation after a distressing situation.",
+    "Hope": "The expectation of a positive outcome or future event.",
+    "Embarrassment": "A feeling of self-consciousness or shame due to a mistake or awkward situation.",
+    "Contempt": "A feeling of disdain or lack of respect for someone or something.",
+    "Love": "An intense feeling of deep affection.",
+    "Hate": "A strong feeling of intense dislike or aversion.",
+    "Frustration": "A feeling of being upset or annoyed due to being unable to achieve something.",
+    "Excitement": "A feeling of great enthusiasm and eagerness." }} \
+  here is the text: {text}
+  """
+  return prompt
+
+
+def get_sentiment_polarity(text):
+  prompt = f"""
+  You will receive the text which contains caribean english words. analyze it carefully. Return me the sentiment dictionary with sentiment and polarity score without any explation \
+  and extra text.\
+  #output format: {{"positive":polarity score, "negative":polarity score,"neutral":polarity score }} \n
+  here is the text: {text}
+  """
+  return prompt
 
 def get_product_type(text):
   splits=text.split("Output:")
@@ -26,8 +64,13 @@ st.title("Caribbean Text Sentiment Analysis System")
 
 text=st.text_input("Input Text Here")
 
+# Use a pipeline as a high-level helper
 
+pipe = pipeline("text-classification", model="mrarish320/caribbean_english_sentiment_fine_tuned_bert")
+label=pipe(text)["Label"]
+polarity=pipe(text)["score"]
 
+res=llm.invoke(get_sentiment_polarity(caribbean_story)).content
 
 
 
