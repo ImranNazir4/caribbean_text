@@ -81,9 +81,10 @@ if st.button("Analyze"):
     # Use a pipeline as a high-level helper
     
     pipe = pipeline("text-classification", model="mrarish320/caribbean_english_sentiment_fine_tuned_bert")
-    label=pipe(text)["Label"]
-    polarity=pipe(text)["score"]
-    
+    label=pipe(text)[0]["label"]
+    polarity=pipe(text)[0]["score"]
+
+    st.write(polarity)
     res=llm.invoke(get_sentiment_polarity(text)).content
     st.write(res)
 
