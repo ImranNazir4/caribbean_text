@@ -121,46 +121,46 @@ if file!=None:
   file_name=file.name
   file_extenstion=file_name.split(".")[-1]
 
-if file_extension=="xlsx" or file_extension=="csv":
-    column_name=st.text_input("Write column name which contains the Text")
-    if file_extension=="xlsx":
-        df=pd.read_excel(file)
-        df_text="".join(df[column_name.strip()].values)
-        with open("df_text.txt") as f:
-            f.write(df_text)
-    if file_extension=="csv":
-        df=pd.read_csv(file)
-        df_text="".join(df[column_name.strip()].values)
-        with open("df_text.txt") as f:
-            f.write(df_text)
-
-    with open("df_text.txt") as f:
-        f=f.read()
-    loader = TextLoader(f)
-    loader.load()
-    # # split the extracted data into text chunks using the text_splitter, which splits the text based on the specified number of characters and overlap
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=100, chunk_overlap=0)
-    text_chunks = text_splitter.split_documents(data)
-    # print the number of chunks obtained
-    # len(text_chunks)
-
-if file_extension=="txt":
-    loader = TextLoader(file)
-    loader.load()
-    # # split the extracted data into text chunks using the text_splitter, which splits the text based on the specified number of characters and overlap
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=100, chunk_overlap=0)
-    text_chunks = text_splitter.split_documents(data)
-    # print the number of chunks obtained
-    # len(text_chunks)
-
-if file_extension=="pdf":
-    loader=PyPDFLoader(file)
-    data = loader.load()
-    # # split the extracted data into text chunks using the text_splitter, which splits the text based on the specified number of characters and overlap
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=100, chunk_overlap=0)
-    text_chunks = text_splitter.split_documents(data)
-    # print the number of chunks obtained
-    # len(text_chunks)
+  if file_extension=="xlsx" or file_extension=="csv":
+      column_name=st.text_input("Write column name which contains the Text")
+      if file_extension=="xlsx":
+          df=pd.read_excel(file)
+          df_text="".join(df[column_name.strip()].values)
+          with open("df_text.txt") as f:
+              f.write(df_text)
+      if file_extension=="csv":
+          df=pd.read_csv(file)
+          df_text="".join(df[column_name.strip()].values)
+          with open("df_text.txt") as f:
+              f.write(df_text)
+  
+      with open("df_text.txt") as f:
+          f=f.read()
+      loader = TextLoader(f)
+      loader.load()
+      # # split the extracted data into text chunks using the text_splitter, which splits the text based on the specified number of characters and overlap
+      text_splitter = RecursiveCharacterTextSplitter(chunk_size=100, chunk_overlap=0)
+      text_chunks = text_splitter.split_documents(data)
+      # print the number of chunks obtained
+      # len(text_chunks)
+  
+  if file_extension=="txt":
+      loader = TextLoader(file)
+      loader.load()
+      # # split the extracted data into text chunks using the text_splitter, which splits the text based on the specified number of characters and overlap
+      text_splitter = RecursiveCharacterTextSplitter(chunk_size=100, chunk_overlap=0)
+      text_chunks = text_splitter.split_documents(data)
+      # print the number of chunks obtained
+      # len(text_chunks)
+  
+  if file_extension=="pdf":
+      loader=PyPDFLoader(file)
+      data = loader.load()
+      # # split the extracted data into text chunks using the text_splitter, which splits the text based on the specified number of characters and overlap
+      text_splitter = RecursiveCharacterTextSplitter(chunk_size=100, chunk_overlap=0)
+      text_chunks = text_splitter.split_documents(data)
+      # print the number of chunks obtained
+      # len(text_chunks)
 
 
 if st.button("Analyze"):
