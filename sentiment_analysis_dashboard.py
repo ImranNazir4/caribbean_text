@@ -76,7 +76,7 @@ st.title("Caribbean Text Sentiment Analysis System")
 
 text=st.text_input("Input Text Here")
 
-if st.button("Analyze")
+if st.button("Analyze"):
 
     # Use a pipeline as a high-level helper
     
