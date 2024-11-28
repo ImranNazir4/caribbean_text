@@ -164,7 +164,7 @@ if file!=None:
       # # split the extracted data into text chunks using the text_splitter, which splits the text based on the specified number of characters and overlap
       text_splitter = RecursiveCharacterTextSplitter(chunk_size=100, chunk_overlap=0)
       text_chunks = text_splitter.split_documents(data)
-      st.srite(text_chunks)
+      st.write(text_chunks)
       
 # print the number of chunks obtained
       # len(text_chunks)
