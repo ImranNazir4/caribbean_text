@@ -15,8 +15,6 @@ from langchain_huggingface import HuggingFaceEmbeddings
 import matplotlib.pyplot as plt
 from langchain_community.document_loaders import TextLoader
 
-# loader = TextLoader("./index.md")
-# loader.load()
 
 # Download NLTK stopwords if not already downloaded
 nltk.download('stopwords')
@@ -28,14 +26,6 @@ stop_words = set(stopwords.words('english'))
 # Load environment variables
 load_dotenv()
 
-def get_meta_title(text):
-    return text.split("\n")[0]
-
-def get_meta_desc(text):
-  for i in (text.split("\n")):
-    if "Description" in i:
-      return i
-
 def get_ner(text):
   prompt = f"""
   You will receive the text which contains caribean english words. analyze it carefully. Return me the NER if there any in the text in form of dictionary without any explation \
@@ -45,8 +35,6 @@ def get_ner(text):
   here is the text: {text}
   """
   return prompt
-
-
 
 def get_emotion_polarity(text):
   prompt = f"""
@@ -113,19 +101,6 @@ def get_text_metrics(text):
   """
   return prompt
 
-
-
-
-
-
-
-def get_product_type(text):
-  splits=text.split("Output:")
-  if len(splits)>1:
-    return splits[1]
-  else:
-    return splits[0]
-
 groq_api_key = os.getenv("GROQ_API_KEY")
 from langchain_groq import ChatGroq
 
@@ -150,12 +125,17 @@ if file_extension=="xlsx" or file_extension=="csv":
     if file_extension=="xlsx:
         df=pd.read_excel(file)
         df_text="".join(df[column_name.strip()].values)
+        with open("df_text.txt") as f:
+            f.write(df_text)
     if file_extension=="csv:
         df=pd.read_csv(file)
         df_text="".join(df[column_name.strip()].values)
+        with open("df_text.txt") as f:
+            f.write(df_text)
 
-
-    loader = TextLoader(file)
+    with open("df_text.txt") as f:
+        f=f.read()
+    loader = TextLoader(f)
     loader.load()
     # # split the extracted data into text chunks using the text_splitter, which splits the text based on the specified number of characters and overlap
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=100, chunk_overlap=0)
