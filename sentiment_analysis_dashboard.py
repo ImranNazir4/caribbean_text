@@ -134,17 +134,17 @@ if st.button("Analyze"):
         st.pyplot(fig)
 
     col1,col2=st.columns(2)
-with col1:
+    with col1:
 
-    # Generate word cloud
-    wordcloud = WordCloud(width=800, height=400, background_color='white',stopwords=stop_words).generate(text)
-    
-    # Display word cloud using Matplotlib
-    fig, ax = plt.subplots(figsize=(10, 5))
-    ax.imshow(wordcloud, interpolation='bilinear')
-    ax.axis("off")  # Hide axes
-    ax.set_title("Word Cloud Visualization", fontsize=16, color="blue")
-    st.pyplot(fig)
+        # Generate word cloud
+        wordcloud = WordCloud(width=800, height=400, background_color='white',stopwords=stop_words).generate(text)
+        
+        # Display word cloud using Matplotlib
+        fig, ax = plt.subplots(figsize=(10, 5))
+        ax.imshow(wordcloud, interpolation='bilinear')
+        ax.axis("off")  # Hide axes
+        ax.set_title("Word Cloud Visualization", fontsize=16, color="blue")
+        st.pyplot(fig)
 
 
 
