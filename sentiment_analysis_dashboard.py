@@ -145,16 +145,18 @@ if file!=None:
 #               # len(text_chunks)
   
   if file_extension=="txt":
-      loader = TextLoader(file)
-      loader.load()
-      # # split the extracted data into text chunks using the text_splitter, which splits the text based on the specified number of characters and overlap
-      text_splitter = RecursiveCharacterTextSplitter(chunk_size=100, chunk_overlap=0)
-      text_chunks = text_splitter.split_documents(data)
-      # print the number of chunks obtained
-      # len(text_chunks)
+  #   with open(file.name) as f:
+  #     f=f.read()
+    loader = TextLoader(file.name)
+    loader.load()
+    # # split the extracted data into text chunks using the text_splitter, which splits the text based on the specified number of characters and overlap
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=100, chunk_overlap=0)
+    text_chunks = text_splitter.split_documents(data)
+    # print the number of chunks obtained
+    # len(text_chunks)
   
   if file_extension=="pdf":
-      loader=PyPDFLoader(file)
+      loader=PyPDFLoader(file.name)
       data = loader.load()
       # # split the extracted data into text chunks using the text_splitter, which splits the text based on the specified number of characters and overlap
       text_splitter = RecursiveCharacterTextSplitter(chunk_size=100, chunk_overlap=0)
