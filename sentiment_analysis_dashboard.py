@@ -9,7 +9,14 @@ import nltk
 import seaborn as sns
 from nltk.corpus import stopwords
 from wordcloud import WordCloud
+from langchain_community.document_loaders import PyPDFLoader
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_huggingface import HuggingFaceEmbeddings
 import matplotlib.pyplot as plt
+from langchain_community.document_loaders import TextLoader
+
+# loader = TextLoader("./index.md")
+# loader.load()
 
 # Download NLTK stopwords if not already downloaded
 nltk.download('stopwords')
@@ -131,8 +138,21 @@ llm = ChatGroq(
 
 st.title("Caribbean Text Sentiment Analysis System")
 
-text=st.text_input("Input Text Here")
 
+file=st.file_uploader("Upload File",["csv","xlsx","pdf","txt"])
+
+# st.write(file.name)
+file_name=file.name
+file_extenstion=file_name.split(".")[-1]
+
+if file_extenstion=="xlsx" or file_extenstion=="csv":
+  column_name=st.text_input("Write column name which contains the Text")
+
+if file_extenstion=="txt":
+
+if file_extenstion=="pdf":
+  # loader=PyPDFLoader("Assignment Description (1).pdf")
+  # data = loader.load()
 if st.button("Analyze"):
 
     # Use a pipeline as a high-level helper
