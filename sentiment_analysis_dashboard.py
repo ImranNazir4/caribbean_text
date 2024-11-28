@@ -121,6 +121,7 @@ if file!=None:
   file_name=file.name
   file_extension=file_name.split(".")[-1]
 
+if st.button("upload"):
   if file_extension=="xlsx" or file_extension=="csv":
       column_name=st.text_input("Write column name which contains the Text")
       if file_extension=="xlsx":
