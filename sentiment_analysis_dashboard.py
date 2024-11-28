@@ -110,7 +110,7 @@ if st.button("Analyze"):
     with col1:
         # Create a Seaborn bar plot
         sns.set(style="whitegrid")
-        fig, ax = plt.subplots()
+        fig, ax = plt.subplots(figsize=(5, 5)))
         sns.barplot(x=sentiment.keys(), y=sentiment.values(),hue=sentiment.keys(),ax=ax)
         plt.title("Sentiment Analysis")
         # plt.xticks(rotation=90)
@@ -123,7 +123,7 @@ if st.button("Analyze"):
     with col2:
         # Create a Seaborn bar plot
         sns.set(style="whitegrid")
-        fig, ax = plt.subplots()
+        fig, ax = plt.subplots(figsize=(5, 5))
         sns.barplot(x=emotion.keys(), y=emotion.values(),hue=emotion.keys(),ax=ax)
         plt.title("Emotion Analysis")
         # plt.xticks(rotation=90)
