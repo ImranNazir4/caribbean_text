@@ -1,9 +1,21 @@
 import os
 import pandas as pd
 import re
+import ast
 import streamlit as st
 from transformers import pipeline
 from dotenv import load_dotenv
+import nltk
+from nltk.corpus import stopwords
+from wordcloud import WordCloud
+import matplotlib.pyplot as plt
+
+# Download NLTK stopwords if not already downloaded
+nltk.download('stopwords')
+
+# List of stop words from NLTK
+stop_words = set(stopwords.words('english'))
+
 
 # Load environment variables
 load_dotenv()
@@ -81,12 +93,22 @@ if st.button("Analyze"):
     # Use a pipeline as a high-level helper
     
     pipe = pipeline("text-classification", model="mrarish320/caribbean_english_sentiment_fine_tuned_bert")
-    label=pipe(text)[0]["label"]
-    polarity=pipe(text)[0]["score"]
+    # label=pipe(text)[0]["label"]
+    # polarity=pipe(text)[0]["score"]
 
-    st.write(polarity)
-    res=llm.invoke(get_sentiment_polarity(text)).content
-    st.write(res)
+    # st.write(polarity)
+    # res=llm.invoke(get_sentiment_polarity(text)).content
+    # st.write(res)
+
+    emotion=llm.invoke(get_emotion_polarity(caribbean_story)).content
+emotion=ast.literal_eval(emotion)
+
+sns.barplot(x=res.keys(), y=res.values(),hue=res.keys())
+plt.xticks(rotation=90)
+plt.show()
+
+
+
 
 
 
