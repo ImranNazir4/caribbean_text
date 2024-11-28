@@ -126,7 +126,7 @@ if file_extension=="xlsx" or file_extension=="csv":
         df=pd.read_excel(file)
         df_text="".join(df[column_name.strip()].values)
         with open("df_text.txt") as f:
-            f.write(df_text")
+            f.write(df_text)
     if file_extension=="csv:
         df=pd.read_csv(file)
         df_text="".join(df[column_name.strip()].values)
