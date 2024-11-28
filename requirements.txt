@@ -1,4 +1,5 @@
 nltk
+wordcloud
 torch
 openpyxl
 python-dotenv
