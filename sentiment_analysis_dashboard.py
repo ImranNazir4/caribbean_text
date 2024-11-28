@@ -104,7 +104,7 @@ if st.button("Analyze"):
     emotion=llm.invoke(get_emotion_polarity(text)).content
     emotion=ast.literal_eval(emotion)
     
-    sns.barplot(x=res.keys(), y=res.values(),hue=res.keys())
+    sns.barplot(x=emotion.keys(), y=emotion.values(),hue=emotion.keys())
     plt.xticks(rotation=90)
     plt.show()
 
