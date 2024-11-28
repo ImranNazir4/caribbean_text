@@ -2,4 +2,4 @@ openpyxl
 python-dotenv
 langchain-groq
 transformers
-pytorch
+tensorflow
