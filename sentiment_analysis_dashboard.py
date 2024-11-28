@@ -74,13 +74,16 @@ st.title("Caribbean Text Sentiment Analysis System")
 
 text=st.text_input("Input Text Here")
 
-# Use a pipeline as a high-level helper
+if st.button("Analyze")
 
-pipe = pipeline("text-classification", model="mrarish320/caribbean_english_sentiment_fine_tuned_bert")
-label=pipe(text)["Label"]
-polarity=pipe(text)["score"]
-
-res=llm.invoke(get_sentiment_polarity(caribbean_story)).content
+    # Use a pipeline as a high-level helper
+    
+    pipe = pipeline("text-classification", model="mrarish320/caribbean_english_sentiment_fine_tuned_bert")
+    label=pipe(text)["Label"]
+    polarity=pipe(text)["score"]
+    
+    res=llm.invoke(get_sentiment_polarity(text)).content
+    st.write(res)
 
 
 
