@@ -229,8 +229,7 @@ if st.button("Analyze"):
     # sentiment=ast.literal_eval(sentiment)
     # # st.write(res)
 
-    # emotion=llm.invoke(get_emotion_polarity(text)).content
-    # emotion=ast.literal_eval(emotion)
+   
 
   # col1,col2=st.columns(2)
 
@@ -276,14 +275,31 @@ if st.button("Analyze"):
     ax.set_title("Word Cloud Visualization", fontsize=16, color="blue")
     st.pyplot(fig)
     
-#     with col2:
+  with col2:
+    emotions_ls=[]
+    for i in range(10):
+      emotion=llm.invoke(get_emotion_polarity(text_chunks[i].page_content)).content
+      emotions_ls.append(ast.literal_eval(emotion))
+    st.write(emotions_ls)
 
-#         # Create a Seaborn bar plot
-#         sns.set(style="whitegrid")
-#         fig, ax = plt.subplots(figsize=(7, 5))
-#         # sns.barplot(x=emotion.keys(), y=emotion.values(),hue=emotion.keys(),ax=ax)
-#         # plt.title("Emotion Analysis")
-#         # plt.xticks(rotation=90)
+    # Create a Seaborn bar plot
+    sns.set(style="whitegrid")
+    fig, ax = plt.subplots(figsize=(7, 5))
+    sns.barplot(x=emotion.keys(), y=emotion.values(),hue=emotion.keys(),ax=ax)
+    plt.title("Emotion Analysis")
+    ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
+    # plt.show()
+    ax.set_title("Sentiment Polarity Score Analysis")
+    # Display in Streamlit
+    st.pyplot(fig)
+
+
+
+
+
+
+
+    
 #         ner=llm.invoke(get_ner(text)).content
 #         ner=ast.literal_eval(ner)
     
