@@ -222,7 +222,7 @@ if st.button("Analyze"):
       sentiment_ls.append("negative")
     if label=="LABEL_0":
       sentiment_ls.append("neutral")
-    # polarity_ls.append(pipe(text_chunks[i].page_content)[0]["score"])
+    polarity_ls.append(pipe(text_chunks[i].page_content)[0]["score"])
 
     # st.write(polarity)
     # sentiment=llm.invoke(get_sentiment_polarity(text)).content
