@@ -210,8 +210,6 @@ if st.button("Analyze"):
   polarity_ls=[]
 
   for i in range(10):
-    
-
     # Use a pipeline as a high-level helper
     st.write(text_chunks[i].page_content)
     
@@ -331,7 +329,7 @@ if st.button("Analyze"):
       
         # for i in ["Readability Score","Quality Score","Coherence"]:
         #   metrics_values.append(text_metrics[i])
-        #   metrics_names.append(i)
+      metrics_names.append(text_metrics["Tone"])
             
     sns.set(style="whitegrid")
     fig, ax = plt.subplots(figsize=(7, 5))
@@ -341,6 +339,24 @@ if st.button("Analyze"):
     ax.set_title("Text Metrics")
     # Display in Streamlit
     st.pyplot(fig)
+
+
+  # col1,col2=st.columns(2)
+  
+  
+  
+  
+  
+  for i in range(10):
+  fig, ax = plt.subplots(figsize=(7, 5))
+  # # Now, use the 'entity_label' column for both x and hue
+  sns.countplot(x=metrics_names,ax=ax)
+  ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
+  # # plt.show()
+  ax.set_title("Tone Analysis")
+  # # Display in Streamlit
+  st.pyplot(fig)    
+  
 
 #     with col2:
 #         st.subheader("Additional Text Metrics") 
