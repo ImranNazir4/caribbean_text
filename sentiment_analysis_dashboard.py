@@ -214,7 +214,7 @@ if st.button("Analyze"):
     # Use a pipeline as a high-level helper
     
     pipe = pipeline("text-classification", model="mrarish320/caribbean_english_sentiment_fine_tuned_bert")
-    label=pipe(text_chunks[i)[0]["label"]
+    label=pipe(text_chunks[i])[0]["label"]
     if label=="LABEL_1":
       sentiment_ls.append("positve")
     if label=="LABEL_2":
