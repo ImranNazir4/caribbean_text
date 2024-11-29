@@ -215,7 +215,7 @@ if st.button("Analyze") and file!=None:
       # Create a Seaborn bar plot
       sns.set(style="whitegrid")
       fig, ax = plt.subplots(figsize=(7, 5))
-      sns.histplot(polarity_ls,ax=ax)
+      sns.histplot(polarity_ls,bins=3,ax=ax)
 
       # sns.displot(x=emotion.keys(), y=emotion.values(),hue=emotion.keys(),ax=ax)
       plt.title("Emotion Analysis")
