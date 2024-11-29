@@ -237,7 +237,7 @@ if st.button("Analyze"):
   #     # Create a Seaborn bar plot
   #     sns.set(style="whitegrid")
   #     fig, ax = plt.subplots(figsize=(7, 5))
-  #     sns.countplot(sentiment_ls,ax=ax)
+  #     sns.countplot(x=sentiment_ls,ax=ax)
   #     plt.title("Sentiment Analysis")
   #     # plt.xticks(rotation=90)
   #     ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
@@ -296,23 +296,21 @@ if st.button("Analyze"):
 
 
 
-
-
-
-
-    
-#         ner=llm.invoke(get_ner(text)).content
-#         ner=ast.literal_eval(ner)
-    
-#         # Convert the ner dictionary to a Pandas DataFrame for long-form data
-#         ner_df = pd.DataFrame({'entity_label': list(ner.values())})
+  col1,col2=st.columns(2)
+  with col1:
+    ner_ls=[]
+    for i in range(10):
+      ner=llm.invoke(get_ner(text_chunks[i].page_content)).content
+      ner_ls.extend(ast.literal_eval(ner).values())
+      # Convert the ner dictionary to a Pandas DataFrame for long-form data
+      ner_df = pd.DataFrame({'entity_label': ner_ls})
         
-#         # Now, use the 'entity_label' column for both x and hue
-#         sns.countplot(x='entity_label', hue='entity_label', data=ner_df,ax=ax)
+      # Now, use the 'entity_label' column for both x and hue
+      sns.countplot(x='entity_label', hue='entity_label', data=ner_df,ax=ax)
  
-#         ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
-#         # plt.show()
-#         ax.set_title("NER Analysis")
+      ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
+      # plt.show()
+      ax.set_title("NER Analysis")
 #         # Display in Streamlit
 #         st.pyplot(fig)
 
