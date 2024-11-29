@@ -128,7 +128,26 @@ if file!=None:
       df=pd.read_excel(file)
       df_text="".join(df[column_name.strip()].values)
       with open("df_text.txt","w") as f:
-          f.write(df_text)
+      #     f.write(df_text)
+      # with open("df.text.txt") as f:
+        
+      # st.write(df_text)
+      # with open(file.name, mode='wb') as w:
+      #   w.write(file.getvalue())
+      loader=PyPDFLoader("df_text.txt")
+      data = loader.load()
+      # # split the extracted data into text chunks using the text_splitter, which splits the text based on the specified number of characters and overlap
+      text_splitter = RecursiveCharacterTextSplitter(chunk_size=100, chunk_overlap=0)
+      text_chunks = text_splitter.split_documents(data)
+      st.write(text_chunks)
+
+  if file_extension=="csv":
+    column_name=st.text_input("Write column name which contains the Text")
+    if column_name!="":
+      df=pd.read_csv(file)
+      df_text="".join(df[column_name.strip()].values)
+      with open("df_text.txt","w") as f:
+        f.write(df_text)
       st.write(df_text)
         
 
