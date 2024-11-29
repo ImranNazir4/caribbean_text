@@ -212,6 +212,7 @@ if st.button("Analyze"):
     
 
     # Use a pipeline as a high-level helper
+    st.write(text_chunks[i])
     
     pipe = pipeline("text-classification", model="mrarish320/caribbean_english_sentiment_fine_tuned_bert")
     label=pipe(text_chunks[i])[0]["label"]
