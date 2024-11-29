@@ -129,6 +129,8 @@ if file!=None:
       df_text="".join(df[column_name.strip()].values)
       with open("df_text.txt","w") as f:
           f.write(df_text)
+      st.write(df_text)
+        
 
   
   # if file_extension=="csv" and column_name!="":
@@ -167,6 +169,7 @@ if file!=None:
       text_splitter = RecursiveCharacterTextSplitter(chunk_size=100, chunk_overlap=0)
       text_chunks = text_splitter.split_documents(data)
       st.write(text_chunks)
+    
       
 # print the number of chunks obtained
       # len(text_chunks)
