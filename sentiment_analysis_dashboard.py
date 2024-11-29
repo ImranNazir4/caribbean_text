@@ -215,14 +215,14 @@ if st.button("Analyze"):
     st.write(text_chunks[i].page_content)
     
     pipe = pipeline("text-classification", model="mrarish320/caribbean_english_sentiment_fine_tuned_bert")
-    label=pipe(text_chunks[i]["page_content"])[0]["label"]
+    label=pipe(text_chunks[i].page_content)[0]["label"]
     if label=="LABEL_1":
       sentiment_ls.append("positve")
     if label=="LABEL_2":
       sentiment_ls.append("negative")
     if label=="LABEL_0":
       sentiment_ls.append("neutral")
-    # polarity_ls.append(pipe(text_chunks[i]["page_content"])[0]["score"])
+    # polarity_ls.append(pipe(text_chunks[i].page_content)[0]["score"])
 
     # st.write(polarity)
     # sentiment=llm.invoke(get_sentiment_polarity(text)).content
