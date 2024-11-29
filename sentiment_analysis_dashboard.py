@@ -347,7 +347,7 @@ if st.button("Analyze"):
   
   
   
-  for i in range(10):
+  # for i in range(10):
   fig, ax = plt.subplots(figsize=(7, 5))
   # # Now, use the 'entity_label' column for both x and hue
   sns.countplot(x=metrics_names,ax=ax)
