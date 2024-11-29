@@ -309,15 +309,15 @@ if st.button("Analyze"):
 
 
 
-    
+    fig, ax = plt.subplots(figsize=(7, 5))
     # # Now, use the 'entity_label' column for both x and hue
-    # sns.countplot(x='entity_label', hue='entity_label', data=ner_df,ax=ax)
+    sns.countplot(x='entity_label', hue='entity_label', data=ner_df,ax=ax)
 
     # ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
     # # plt.show()
     # ax.set_title("NER Analysis")
     # # Display in Streamlit
-    # st.pyplot(fig)
+    st.pyplot(fig)
 
 
 #     col1,col2=st.columns(2)
