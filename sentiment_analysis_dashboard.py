@@ -149,7 +149,7 @@ if file!=None:
     with open(file.name, mode='wb') as w:
         w.write(file.getvalue())
     loader = TextLoader(file.name)
-    loader.load()
+    data=loader.load()
     # # split the extracted data into text chunks using the text_splitter, which splits the text based on the specified number of characters and overlap
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=100, chunk_overlap=0)
     text_chunks = text_splitter.split_documents(data)
