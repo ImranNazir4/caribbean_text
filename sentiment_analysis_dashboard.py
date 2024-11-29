@@ -304,15 +304,14 @@ if st.button("Analyze"):
       ner_ls.extend(ast.literal_eval(ner).values())
       # Convert the ner dictionary to a Pandas DataFrame for long-form data
       ner_df = pd.DataFrame({'entity_label': ner_ls})
-        
       # Now, use the 'entity_label' column for both x and hue
       sns.countplot(x='entity_label', hue='entity_label', data=ner_df,ax=ax)
  
       ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
       # plt.show()
       ax.set_title("NER Analysis")
-#         # Display in Streamlit
-#         st.pyplot(fig)
+      # Display in Streamlit
+      st.pyplot(fig)
 
 
 #     col1,col2=st.columns(2)
