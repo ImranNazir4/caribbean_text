@@ -288,7 +288,7 @@ if st.button("Analyze"):
     # Create a Seaborn bar plot
     sns.set(style="whitegrid")
     fig, ax = plt.subplots(figsize=(7, 5))
-    sns.countplot(emotions_ls,hue=list(set(emotions_ls)),ax=ax)
+    sns.countplot(emotions_ls,ax=ax)
     plt.title("Emotion Analysis")
     ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
     # Display in Streamlit
