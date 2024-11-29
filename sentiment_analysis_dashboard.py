@@ -279,13 +279,16 @@ if st.button("Analyze"):
     emotions_ls=[]
     for i in range(10):
       emotion=llm.invoke(get_emotion_polarity(text_chunks[i].page_content)).content
-      emotions_ls.append(ast.literal_eval(emotion))
-    st.write(emotions_ls)
+      emotion=ast.literal_eval(emotion)
+      max_key = max(emotion, key=emotion.get)  # Get the key with the maximum value
+      # max_value = data[max_key]  # Get the corresponding value
+      emotions_ls.append(max_key)
+    # st.write(emotions_ls)
 
     # Create a Seaborn bar plot
     sns.set(style="whitegrid")
     fig, ax = plt.subplots(figsize=(7, 5))
-    sns.barplot(x=emotion.keys(), y=emotion.values(),hue=emotion.keys(),ax=ax)
+    sns.countplot(emotions_ls,hue=list(set(emotions_ls),ax=ax)
     plt.title("Emotion Analysis")
     ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
     # plt.show()
