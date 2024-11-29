@@ -128,7 +128,7 @@ if file!=None:
       df=pd.read_excel(file)
       df_text="".join(df[column_name.strip()].values)
       with open("df_text.txt","w") as f:
-      #     f.write(df_text)
+          f.write(df_text)
       # with open("df.text.txt") as f:
         
       # st.write(df_text)
