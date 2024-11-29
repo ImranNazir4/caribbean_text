@@ -329,7 +329,7 @@ if st.button("Analyze"):
       
         # for i in ["Readability Score","Quality Score","Coherence"]:
         #   metrics_values.append(text_metrics[i])
-      metrics_names.append(text_metrics["Tone"])
+      metrics_names.append(text_metrics["Tone"].strip().lower())
             
     sns.set(style="whitegrid")
     fig, ax = plt.subplots(figsize=(7, 5))
