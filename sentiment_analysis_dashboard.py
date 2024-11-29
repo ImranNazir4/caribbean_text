@@ -320,7 +320,7 @@ if st.button("Analyze"):
     readability_score=0
     quality_score=0
     coherence=0
-    for i in range(10):    
+    for i in range(30):    
       text_metrics=llm.invoke(get_text_metrics(text_chunks[i].page_content)).content
       text_metrics=ast.literal_eval(text_metrics)
       readability_score+=text_metrics["Readability Score"]
