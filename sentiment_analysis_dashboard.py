@@ -205,19 +205,31 @@ if file!=None:
 
 if st.button("Analyze"):
 
+  sentiment_ls=[]
+  polarity_ls=[]
+
+  for i in range(len(text_chunks)):
+    
+
     # Use a pipeline as a high-level helper
     
     pipe = pipeline("text-classification", model="mrarish320/caribbean_english_sentiment_fine_tuned_bert")
-    # label=pipe(text)[0]["label"]
-    # polarity=pipe(text)[0]["score"]
+    label=pipe(text_chunks[i)[0]["label"]
+    if label=="LABEL_1":
+      sentiment_ls.append("positve")
+    if label=="LABEL_2":
+      sentiment_ls.append("negative")
+    if label=="LABEL_0":
+      sentiment_ls.append("neutral")
+    # polarity_ls.append(pipe(text_chunks[i])[0]["score"])
 
     # st.write(polarity)
-    sentiment=llm.invoke(get_sentiment_polarity(text)).content
-    sentiment=ast.literal_eval(sentiment)
-    # st.write(res)
+    # sentiment=llm.invoke(get_sentiment_polarity(text)).content
+    # sentiment=ast.literal_eval(sentiment)
+    # # st.write(res)
 
-    emotion=llm.invoke(get_emotion_polarity(text)).content
-    emotion=ast.literal_eval(emotion)
+    # emotion=llm.invoke(get_emotion_polarity(text)).content
+    # emotion=ast.literal_eval(emotion)
 
     col1,col2=st.columns(2)
 
@@ -225,7 +237,7 @@ if st.button("Analyze"):
         # Create a Seaborn bar plot
         sns.set(style="whitegrid")
         fig, ax = plt.subplots(figsize=(7, 5))
-        sns.barplot(x=sentiment.keys(), y=sentiment.values(),hue=sentiment.keys(),ax=ax)
+        sns.sns.countplot(sentiment_ls,ax=ax)
         plt.title("Sentiment Analysis")
         # plt.xticks(rotation=90)
         ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
@@ -238,7 +250,9 @@ if st.button("Analyze"):
         # Create a Seaborn bar plot
         sns.set(style="whitegrid")
         fig, ax = plt.subplots(figsize=(7, 5))
-        sns.barplot(x=emotion.keys(), y=emotion.values(),hue=emotion.keys(),ax=ax)
+        sns.displot(ploarity_ls,ax=ax)
+
+        # sns.displot(x=emotion.keys(), y=emotion.values(),hue=emotion.keys(),ax=ax)
         plt.title("Emotion Analysis")
         # plt.xticks(rotation=90)
         ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
