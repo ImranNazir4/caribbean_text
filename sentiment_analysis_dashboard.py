@@ -112,7 +112,7 @@ llm = ChatGroq(
   api_key=groq_api_key)
 
 
-st.title("Caribbean Text Sentiment Analysis System")
+st.subheader("Caribbean Text Sentiment Analysis System")
 
 
 file=st.file_uploader("Upload File",["csv","xlsx","pdf","txt"])
