@@ -222,7 +222,7 @@ if st.button("Analyze") and file!=None:
       # plt.xticks(rotation=90)
       ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
       # plt.show()
-      ax.set_title("Sentiment Polarity Score Analysis")
+      ax.set_title("BERT Confidence in Sentiment Prediction")
       # Display in Streamlit
       st.pyplot(fig)
 
