@@ -104,16 +104,12 @@ def get_text_metrics(text):
 groq_api_key = os.getenv("GROQ_API_KEY")
 from langchain_groq import ChatGroq
 
-# llm=()
-
 llm = ChatGroq(
   temperature=0,
   model="llama-3.1-70b-versatile",
   api_key=groq_api_key)
 
-
 st.subheader("Caribbean Text Sentiment Analysis System")
-
 
 file=st.file_uploader("Upload File",["csv","xlsx","pdf","txt"])
 
@@ -169,9 +165,6 @@ if file!=None:
     # # split the extracted data into text chunks using the text_splitter, which splits the text based on the specified number of characters and overlap
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=100, chunk_overlap=0)
     text_chunks = text_splitter.split_documents(data)
-    # st.write(chunks)
-    # print the number of chunks obtained
-    # len(text_chunks)
   
   if file_extension=="pdf":
       with open(file.name, mode='wb') as w:
@@ -184,7 +177,7 @@ if file!=None:
       # st.write(text_chunks[0])
     
 
-if st.button("Analyze"):
+if st.button("Analyze") and file!=None:
 
   sentiment_ls=[]
   polarity_ls=[]
@@ -202,13 +195,6 @@ if st.button("Analyze"):
     if label=="LABEL_0":
       sentiment_ls.append("neutral")
     polarity_ls.append(pipe(text_chunks[i].page_content)[0]["score"])
-
-    # st.write(polarity)
-    # sentiment=llm.invoke(get_sentiment_polarity(text)).content
-    # sentiment=ast.literal_eval(sentiment)
-    # st.write(res)
-
-   
 
   col1,col2=st.columns(2)
 
@@ -307,8 +293,6 @@ if st.button("Analyze"):
       quality_score+=text_metrics["Quality Score"]
       coherence+=text_metrics["Coherence"]
       
-        # for i in ["Readability Score","Quality Score","Coherence"]:
-        #   metrics_values.append(text_metrics[i])
       metrics_names.append(text_metrics["Tone"].strip().lower())
             
     sns.set(style="whitegrid")
@@ -321,76 +305,13 @@ if st.button("Analyze"):
     st.pyplot(fig)
 
 
-  # col1,col2=st.columns(2)
-  
-  
-  
-  
-  
-  # for i in range(10):
+  # col1,col2=st.column
   fig, ax = plt.subplots(figsize=(7, 5))
-  # # Now, use the 'entity_label' column for both x and hue
   sns.countplot(x=metrics_names,ax=ax)
   ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
-  # # plt.show()
   ax.set_title("Tone Analysis")
-  # # Display in Streamlit
+  # Display in Streamlit
   st.pyplot(fig)    
   
 
-#     with col2:
-#         st.subheader("Additional Text Metrics") 
-#         st.subheader("Tone")
-#         st.write(text_metrics["Tone"])
-#         st.subheader("Coherence Score")
-#         st.write(text_metrics["Coherence"])
-#         st.subheader("Coherence")
-#         st.write(text_metrics["Coherence"])
 
-
-
-        
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# # selection = st.sidebar.radio(
-# #     "Select",
-# #     ("Separte Title and Description", "Get Product Type"))
-# # file_name=st.file_uploader("Upload the File", type=["xlsx"])
-
-# # if file_name is not None:
-# #     df=pd.read_excel(file_name)
-
-
-# # col1,col2,col3,col4,col5=st.columns(5)
-# if selection=="Separte Title and Description":
-#     # with col3:
-#     if st.button("Submit"):
-#         df["meta_title"]=df["Unnamed: 2"].apply(lambda x:get_meta_title(x))
-#         df["meta_desc"]=df["Unnamed: 2"].apply(lambda x:get_meta_desc(x))
-
-#         df["meta_title"]=df["meta_title"].apply(lambda x:re.sub("\*\*Meta Title:\*\*","",x))
-#         df["meta_title"]=df["meta_title"].apply(lambda x:x.strip())
-
-
-
-#         df["meta_desc"]=df["meta_desc"].apply(lambda x:re.sub("\*\*Meta Description:\*\*","",x))
-#         df["meta_desc"]=df["meta_desc"].apply(lambda x:x.strip())
-#         st.write(df)
-
-# if selection=="Get Product Type":
-#     if st.button("Submit"):
-#         df["product type"]=df["Unnamed: 3"].apply(lambda x:get_product_type(x))
-#         st.write(df)
