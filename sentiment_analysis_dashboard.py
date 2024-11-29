@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+import numpy as np
 import re
 import ast
 import streamlit as st
@@ -314,24 +315,32 @@ if st.button("Analyze"):
     st.pyplot(fig)
 
 
-#     col1,col2=st.columns(2)
-#     with col1:
-#         text_metrics=llm.invoke(get_text_metrics(text)).content
-#         text_metrics=ast.literal_eval(text_metrics)
-#         metrics_names=[]
-#         metrics_values=[]
-#         for i in ["Readability Score","Quality Score","Coherence"]:
-#           metrics_values.append(text_metrics[i])
-#           metrics_names.append(i)
+  with col2:
+    text_metrics_ls=[]
+    metrics_names=[]
+    metrics_values=[]
+    readability_score=0
+    quality_score=0
+    coherence=0
+    for i in range(10):    
+      text_metrics=llm.invoke(get_text_metrics(text_chunks[i].page_content)).content
+      text_metrics=ast.literal_eval(text_metrics)
+      readability_score+=text_metrics["Readability Score"]
+      quality_score+=text_metrics["Quality Score"]
+      coherence+=text_metrics["Coherence"]
+      
+        # for i in ["Readability Score","Quality Score","Coherence"]:
+        #   metrics_values.append(text_metrics[i])
+        #   metrics_names.append(i)
             
-#         sns.set(style="whitegrid")
-#         fig, ax = plt.subplots(figsize=(7, 5))
-#         sns.barplot(x=metrics_names,y=metrics_values,hue=metrics_names,ax=ax)
-#         ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
-#         # plt.show()
-#         ax.set_title("Text Metrics")
-#         # Display in Streamlit
-#         st.pyplot(fig)
+    sns.set(style="whitegrid")
+    fig, ax = plt.subplots(figsize=(7, 5))
+    sns.barplot(x=["Readability Score","Quality Score","Coherence"],y=[readability_score/10,quality_score/10,coherence/10],hue=["Readability Score","Quality Score","Coherence"],ax=ax)
+    ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
+    # plt.show()
+    ax.set_title("Text Metrics")
+    # Display in Streamlit
+    st.pyplot(fig)
 
 #     with col2:
 #         st.subheader("Additional Text Metrics") 
