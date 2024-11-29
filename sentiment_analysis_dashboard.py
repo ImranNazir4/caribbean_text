@@ -181,7 +181,7 @@ if file!=None:
       # # split the extracted data into text chunks using the text_splitter, which splits the text based on the specified number of characters and overlap
       text_splitter = RecursiveCharacterTextSplitter(chunk_size=100, chunk_overlap=0)
       text_chunks = text_splitter.split_documents(data)
-      st.write(text_chunks)
+      # st.write(text_chunks)
     
 
 if st.button("Analyze"):
@@ -203,7 +203,7 @@ if st.button("Analyze"):
       sentiment_ls.append("neutral")
     polarity_ls.append(pipe(text_chunks[i].page_content)[0]["score"])
 
-    st.write(polarity)
+    # st.write(polarity)
     sentiment=llm.invoke(get_sentiment_polarity(text)).content
     sentiment=ast.literal_eval(sentiment)
     # st.write(res)
