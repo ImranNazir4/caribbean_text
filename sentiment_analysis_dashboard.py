@@ -134,7 +134,7 @@ if file!=None:
       # st.write(df_text)
       # with open(file.name, mode='wb') as w:
       #   w.write(file.getvalue())
-      loader=PyPDFLoader("df_text.txt")
+      loader=TextLoader("df_text.txt")
       data = loader.load()
       # # split the extracted data into text chunks using the text_splitter, which splits the text based on the specified number of characters and overlap
       text_splitter = RecursiveCharacterTextSplitter(chunk_size=100, chunk_overlap=0)
