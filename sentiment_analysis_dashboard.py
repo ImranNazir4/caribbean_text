@@ -122,12 +122,13 @@ if file!=None:
   file_extension=file_name.split(".")[-1]
 
 # # if st.button("upload"):
-  if file_extension=="xlsx" or file_extension=="csv":
+  if file_extension=="xlsx":
     column_name=st.text_input("Write column name which contains the Text")
-    df=pd.read_excel(file)
-    df_text="".join(df[column_name.strip()].values)
-    with open("df_text.txt","w") as f:
-        f.write(df_text)
+    if column_name!="":
+      df=pd.read_excel(file)
+      df_text="".join(df[column_name.strip()].values)
+      with open("df_text.txt","w") as f:
+          f.write(df_text)
 
   
   # if file_extension=="csv" and column_name!="":
