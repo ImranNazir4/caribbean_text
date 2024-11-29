@@ -232,7 +232,7 @@ if st.button("Analyze"):
     # emotion=llm.invoke(get_emotion_polarity(text)).content
     # emotion=ast.literal_eval(emotion)
 
-  col1,col2=st.columns(2)
+  # col1,col2=st.columns(2)
 
   # with col1:
   #     # Create a Seaborn bar plot
@@ -262,18 +262,18 @@ if st.button("Analyze"):
   #     # Display in Streamlit
   #     st.pyplot(fig)
 
-#     col1,col2=st.columns(2)
-#     with col1:
-
-#         # Generate word cloud
-#         wordcloud = WordCloud(width=800, height=665, background_color='white',stopwords=stop_words).generate(text)
-        
-#         # Display word cloud using Matplotlib
-#         fig, ax = plt.subplots(figsize=(10, 5))
-#         ax.imshow(wordcloud, interpolation='bilinear')
-#         ax.axis("off")  # Hide axes
-#         ax.set_title("Word Cloud Visualization", fontsize=16, color="blue")
-#         st.pyplot(fig)
+  col1,col2=st.columns(2)
+  with col1:
+    text = [text_chunks[i].page_content for i in range(len(text_chunks))]
+    # Generate word cloud
+    wordcloud = WordCloud(width=800, height=665, background_color='white',stopwords=stop_words).generate(text)
+    
+    # Display word cloud using Matplotlib
+    fig, ax = plt.subplots(figsize=(10, 5))
+    ax.imshow(wordcloud, interpolation='bilinear')
+    ax.axis("off")  # Hide axes
+    ax.set_title("Word Cloud Visualization", fontsize=16, color="blue")
+    st.pyplot(fig)
     
 #     with col2:
 
