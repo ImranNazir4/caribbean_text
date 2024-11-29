@@ -262,70 +262,70 @@ if st.button("Analyze"):
       # Display in Streamlit
       st.pyplot(fig)
 
-    col1,col2=st.columns(2)
-    with col1:
+#     col1,col2=st.columns(2)
+#     with col1:
 
-        # Generate word cloud
-        wordcloud = WordCloud(width=800, height=665, background_color='white',stopwords=stop_words).generate(text)
+#         # Generate word cloud
+#         wordcloud = WordCloud(width=800, height=665, background_color='white',stopwords=stop_words).generate(text)
         
-        # Display word cloud using Matplotlib
-        fig, ax = plt.subplots(figsize=(10, 5))
-        ax.imshow(wordcloud, interpolation='bilinear')
-        ax.axis("off")  # Hide axes
-        ax.set_title("Word Cloud Visualization", fontsize=16, color="blue")
-        st.pyplot(fig)
+#         # Display word cloud using Matplotlib
+#         fig, ax = plt.subplots(figsize=(10, 5))
+#         ax.imshow(wordcloud, interpolation='bilinear')
+#         ax.axis("off")  # Hide axes
+#         ax.set_title("Word Cloud Visualization", fontsize=16, color="blue")
+#         st.pyplot(fig)
     
-    with col2:
+#     with col2:
 
-        # Create a Seaborn bar plot
-        sns.set(style="whitegrid")
-        fig, ax = plt.subplots(figsize=(7, 5))
-        # sns.barplot(x=emotion.keys(), y=emotion.values(),hue=emotion.keys(),ax=ax)
-        # plt.title("Emotion Analysis")
-        # plt.xticks(rotation=90)
-        ner=llm.invoke(get_ner(text)).content
-        ner=ast.literal_eval(ner)
+#         # Create a Seaborn bar plot
+#         sns.set(style="whitegrid")
+#         fig, ax = plt.subplots(figsize=(7, 5))
+#         # sns.barplot(x=emotion.keys(), y=emotion.values(),hue=emotion.keys(),ax=ax)
+#         # plt.title("Emotion Analysis")
+#         # plt.xticks(rotation=90)
+#         ner=llm.invoke(get_ner(text)).content
+#         ner=ast.literal_eval(ner)
     
-        # Convert the ner dictionary to a Pandas DataFrame for long-form data
-        ner_df = pd.DataFrame({'entity_label': list(ner.values())})
+#         # Convert the ner dictionary to a Pandas DataFrame for long-form data
+#         ner_df = pd.DataFrame({'entity_label': list(ner.values())})
         
-        # Now, use the 'entity_label' column for both x and hue
-        sns.countplot(x='entity_label', hue='entity_label', data=ner_df,ax=ax)
+#         # Now, use the 'entity_label' column for both x and hue
+#         sns.countplot(x='entity_label', hue='entity_label', data=ner_df,ax=ax)
  
-        ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
-        # plt.show()
-        ax.set_title("NER Analysis")
-        # Display in Streamlit
-        st.pyplot(fig)
+#         ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
+#         # plt.show()
+#         ax.set_title("NER Analysis")
+#         # Display in Streamlit
+#         st.pyplot(fig)
 
 
-    col1,col2=st.columns(2)
-    with col1:
-        text_metrics=llm.invoke(get_text_metrics(text)).content
-        text_metrics=ast.literal_eval(text_metrics)
-        metrics_names=[]
-        metrics_values=[]
-        for i in ["Readability Score","Quality Score","Coherence"]:
-          metrics_values.append(text_metrics[i])
-          metrics_names.append(i)
+#     col1,col2=st.columns(2)
+#     with col1:
+#         text_metrics=llm.invoke(get_text_metrics(text)).content
+#         text_metrics=ast.literal_eval(text_metrics)
+#         metrics_names=[]
+#         metrics_values=[]
+#         for i in ["Readability Score","Quality Score","Coherence"]:
+#           metrics_values.append(text_metrics[i])
+#           metrics_names.append(i)
             
-        sns.set(style="whitegrid")
-        fig, ax = plt.subplots(figsize=(7, 5))
-        sns.barplot(x=metrics_names,y=metrics_values,hue=metrics_names,ax=ax)
-        ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
-        # plt.show()
-        ax.set_title("Text Metrics")
-        # Display in Streamlit
-        st.pyplot(fig)
+#         sns.set(style="whitegrid")
+#         fig, ax = plt.subplots(figsize=(7, 5))
+#         sns.barplot(x=metrics_names,y=metrics_values,hue=metrics_names,ax=ax)
+#         ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
+#         # plt.show()
+#         ax.set_title("Text Metrics")
+#         # Display in Streamlit
+#         st.pyplot(fig)
 
-    with col2:
-        st.subheader("Additional Text Metrics") 
-        st.subheader("Tone")
-        st.write(text_metrics["Tone"])
-        st.subheader("Coherence Score")
-        st.write(text_metrics["Coherence"])
-        st.subheader("Coherence")
-        st.write(text_metrics["Coherence"])
+#     with col2:
+#         st.subheader("Additional Text Metrics") 
+#         st.subheader("Tone")
+#         st.write(text_metrics["Tone"])
+#         st.subheader("Coherence Score")
+#         st.write(text_metrics["Coherence"])
+#         st.subheader("Coherence")
+#         st.write(text_metrics["Coherence"])
 
 
 
@@ -345,13 +345,13 @@ if st.button("Analyze"):
 
 
 
-# selection = st.sidebar.radio(
-#     "Select",
-#     ("Separte Title and Description", "Get Product Type"))
-# file_name=st.file_uploader("Upload the File", type=["xlsx"])
+# # selection = st.sidebar.radio(
+# #     "Select",
+# #     ("Separte Title and Description", "Get Product Type"))
+# # file_name=st.file_uploader("Upload the File", type=["xlsx"])
 
-# if file_name is not None:
-#     df=pd.read_excel(file_name)
+# # if file_name is not None:
+# #     df=pd.read_excel(file_name)
 
 
 # # col1,col2,col3,col4,col5=st.columns(5)
