@@ -9,10 +9,10 @@ import nltk
 import seaborn as sns
 from nltk.corpus import stopwords
 from wordcloud import WordCloud
-from langchain_community.document_loaders import PyPDFLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-import matplotlib.pyplot as plt
-from langchain_community.document_loaders import TextLoader
+# from langchain_community.document_loaders import PyPDFLoader
+# from langchain.text_splitter import RecursiveCharacterTextSplitter
+# import matplotlib.pyplot as plt
+# from langchain_community.document_loaders import TextLoader
 
 
 # Download NLTK stopwords if not already downloaded
