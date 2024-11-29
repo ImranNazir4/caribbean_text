@@ -265,6 +265,7 @@ if st.button("Analyze"):
   col1,col2=st.columns(2)
   with col1:
     text = [text_chunks[i].page_content for i in range(len(text_chunks))]
+    text=" ".join(text)
     # Generate word cloud
     wordcloud = WordCloud(width=800, height=665, background_color='white',stopwords=stop_words).generate(text)
     
