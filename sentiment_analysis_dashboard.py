@@ -208,7 +208,7 @@ if st.button("Analyze"):
   sentiment_ls=[]
   polarity_ls=[]
 
-  for i in range(10)):
+  for i in range(10):
     
 
     # Use a pipeline as a high-level helper
