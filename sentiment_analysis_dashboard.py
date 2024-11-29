@@ -238,7 +238,7 @@ if st.button("Analyze"):
         # Create a Seaborn bar plot
         sns.set(style="whitegrid")
         fig, ax = plt.subplots(figsize=(7, 5))
-        sns.sns.countplot(sentiment_ls,ax=ax)
+        sns.countplot(sentiment_ls,ax=ax)
         plt.title("Sentiment Analysis")
         # plt.xticks(rotation=90)
         ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
