@@ -103,12 +103,12 @@ def get_text_metrics(text):
 groq_api_key = os.getenv("GROQ_API_KEY")
 from langchain_groq import ChatGroq
 
-llm=()
+# llm=()
 
-# llm = ChatGroq(
-#   temperature=0,
-#   model="llama-3.1-70b-versatile",
-#   api_key=groq_api_key)
+llm = ChatGroq(
+  temperature=0,
+  model="llama-3.1-70b-versatile",
+  api_key=groq_api_key)
 
 
 st.title("Caribbean Text Sentiment Analysis System")
@@ -214,15 +214,15 @@ if st.button("Analyze"):
     # Use a pipeline as a high-level helper
     st.write(text_chunks[i].page_content)
     
-    pipe = pipeline("text-classification", model="mrarish320/caribbean_english_sentiment_fine_tuned_bert")
-    label=pipe(text_chunks[i].page_content)[0]["label"]
-    if label=="LABEL_1":
-      sentiment_ls.append("positve")
-    if label=="LABEL_2":
-      sentiment_ls.append("negative")
-    if label=="LABEL_0":
-      sentiment_ls.append("neutral")
-    polarity_ls.append(pipe(text_chunks[i].page_content)[0]["score"])
+    # pipe = pipeline("text-classification", model="mrarish320/caribbean_english_sentiment_fine_tuned_bert")
+    # label=pipe(text_chunks[i].page_content)[0]["label"]
+    # if label=="LABEL_1":
+    #   sentiment_ls.append("positve")
+    # if label=="LABEL_2":
+    #   sentiment_ls.append("negative")
+    # if label=="LABEL_0":
+    #   sentiment_ls.append("neutral")
+    # polarity_ls.append(pipe(text_chunks[i].page_content)[0]["score"])
 
     # st.write(polarity)
     # sentiment=llm.invoke(get_sentiment_polarity(text)).content
@@ -234,33 +234,33 @@ if st.button("Analyze"):
 
   col1,col2=st.columns(2)
 
-  with col1:
-      # Create a Seaborn bar plot
-      sns.set(style="whitegrid")
-      fig, ax = plt.subplots(figsize=(7, 5))
-      sns.countplot(sentiment_ls,ax=ax)
-      plt.title("Sentiment Analysis")
-      # plt.xticks(rotation=90)
-      ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
-      # plt.show()
-      ax.set_title("Sentiment Analysis")
-      # Display in Streamlit
-      st.pyplot(fig)
+  # with col1:
+  #     # Create a Seaborn bar plot
+  #     sns.set(style="whitegrid")
+  #     fig, ax = plt.subplots(figsize=(7, 5))
+  #     sns.countplot(sentiment_ls,ax=ax)
+  #     plt.title("Sentiment Analysis")
+  #     # plt.xticks(rotation=90)
+  #     ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
+  #     # plt.show()
+  #     ax.set_title("Sentiment Analysis")
+  #     # Display in Streamlit
+  #     st.pyplot(fig)
  
-  with col2:
-      # Create a Seaborn bar plot
-      sns.set(style="whitegrid")
-      fig, ax = plt.subplots(figsize=(7, 5))
-      sns.histplot(polarity_ls,ax=ax)
+  # with col2:
+  #     # Create a Seaborn bar plot
+  #     sns.set(style="whitegrid")
+  #     fig, ax = plt.subplots(figsize=(7, 5))
+  #     sns.histplot(polarity_ls,ax=ax)
 
-      # sns.displot(x=emotion.keys(), y=emotion.values(),hue=emotion.keys(),ax=ax)
-      plt.title("Emotion Analysis")
-      # plt.xticks(rotation=90)
-      ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
-      # plt.show()
-      ax.set_title("Emotion Analysis")
-      # Display in Streamlit
-      st.pyplot(fig)
+  #     # sns.displot(x=emotion.keys(), y=emotion.values(),hue=emotion.keys(),ax=ax)
+  #     plt.title("Emotion Analysis")
+  #     # plt.xticks(rotation=90)
+  #     ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
+  #     # plt.show()
+  #     ax.set_title("Sentiment Polarity Score Analysis")
+  #     # Display in Streamlit
+  #     st.pyplot(fig)
 
 #     col1,col2=st.columns(2)
 #     with col1:
