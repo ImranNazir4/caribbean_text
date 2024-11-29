@@ -160,22 +160,6 @@ if file!=None:
       text_splitter = RecursiveCharacterTextSplitter(chunk_size=100, chunk_overlap=0)
       text_chunks = text_splitter.split_documents(data)
       # st.write(text_chunks)
-
-  
-  # if file_extension=="csv" and column_name!="":
-#           df=pd.read_csv(file)
-#           df_text="".join(df[column_name.strip()].values)
-#           with open("df_text.txt","w") as f:
-#               f.write(df_text)
-#           with open("df_text.txt") as f:
-#               f=f.read()
-#               loader = TextLoader(f)
-#               loader.load()
-#               # # split the extracted data into text chunks using the text_splitter, which splits the text based on the specified number of characters and overlap
-#               text_splitter = RecursiveCharacterTextSplitter(chunk_size=100, chunk_overlap=0)
-#               text_chunks = text_splitter.split_documents(data)
-#               # print the number of chunks obtained
-#               # len(text_chunks)
   
   if file_extension=="txt":
     with open(file.name, mode='wb') as w:
@@ -199,66 +183,62 @@ if file!=None:
       text_chunks = text_splitter.split_documents(data)
       st.write(text_chunks)
     
-      
-# print the number of chunks obtained
-      # len(text_chunks)
-
 
 if st.button("Analyze"):
 
   sentiment_ls=[]
   polarity_ls=[]
 
-  for i in range(10):
+  for i in range(len(text_chunks)):
     # Use a pipeline as a high-level helper
     st.write(text_chunks[i].page_content)
     
-    # pipe = pipeline("text-classification", model="mrarish320/caribbean_english_sentiment_fine_tuned_bert")
-    # label=pipe(text_chunks[i].page_content)[0]["label"]
-    # if label=="LABEL_1":
-    #   sentiment_ls.append("positve")
-    # if label=="LABEL_2":
-    #   sentiment_ls.append("negative")
-    # if label=="LABEL_0":
-    #   sentiment_ls.append("neutral")
-    # polarity_ls.append(pipe(text_chunks[i].page_content)[0]["score"])
+    pipe = pipeline("text-classification", model="mrarish320/caribbean_english_sentiment_fine_tuned_bert")
+    label=pipe(text_chunks[i].page_content)[0]["label"]
+    if label=="LABEL_1":
+      sentiment_ls.append("positve")
+    if label=="LABEL_2":
+      sentiment_ls.append("negative")
+    if label=="LABEL_0":
+      sentiment_ls.append("neutral")
+    polarity_ls.append(pipe(text_chunks[i].page_content)[0]["score"])
 
-    # st.write(polarity)
-    # sentiment=llm.invoke(get_sentiment_polarity(text)).content
-    # sentiment=ast.literal_eval(sentiment)
-    # # st.write(res)
+    st.write(polarity)
+    sentiment=llm.invoke(get_sentiment_polarity(text)).content
+    sentiment=ast.literal_eval(sentiment)
+    # st.write(res)
 
    
 
-  # col1,col2=st.columns(2)
+  col1,col2=st.columns(2)
 
-  # with col1:
-  #     # Create a Seaborn bar plot
-  #     sns.set(style="whitegrid")
-  #     fig, ax = plt.subplots(figsize=(7, 5))
-  #     sns.countplot(x=sentiment_ls,ax=ax)
-  #     plt.title("Sentiment Analysis")
-  #     # plt.xticks(rotation=90)
-  #     ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
-  #     # plt.show()
-  #     ax.set_title("Sentiment Analysis")
-  #     # Display in Streamlit
-  #     st.pyplot(fig)
+  with col1:
+      # Create a Seaborn bar plot
+      sns.set(style="whitegrid")
+      fig, ax = plt.subplots(figsize=(7, 5))
+      sns.countplot(x=sentiment_ls,ax=ax)
+      plt.title("Sentiment Analysis")
+      # plt.xticks(rotation=90)
+      ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
+      # plt.show()
+      ax.set_title("Sentiment Analysis")
+      # Display in Streamlit
+      st.pyplot(fig)
  
-  # with col2:
-  #     # Create a Seaborn bar plot
-  #     sns.set(style="whitegrid")
-  #     fig, ax = plt.subplots(figsize=(7, 5))
-  #     sns.histplot(polarity_ls,ax=ax)
+  with col2:
+      # Create a Seaborn bar plot
+      sns.set(style="whitegrid")
+      fig, ax = plt.subplots(figsize=(7, 5))
+      sns.histplot(polarity_ls,ax=ax)
 
-  #     # sns.displot(x=emotion.keys(), y=emotion.values(),hue=emotion.keys(),ax=ax)
-  #     plt.title("Emotion Analysis")
-  #     # plt.xticks(rotation=90)
-  #     ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
-  #     # plt.show()
-  #     ax.set_title("Sentiment Polarity Score Analysis")
-  #     # Display in Streamlit
-  #     st.pyplot(fig)
+      # sns.displot(x=emotion.keys(), y=emotion.values(),hue=emotion.keys(),ax=ax)
+      plt.title("Emotion Analysis")
+      # plt.xticks(rotation=90)
+      ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
+      # plt.show()
+      ax.set_title("Sentiment Polarity Score Analysis")
+      # Display in Streamlit
+      st.pyplot(fig)
 
   col1,col2=st.columns(2)
   with col1:
@@ -276,7 +256,7 @@ if st.button("Analyze"):
     
   with col2:
     emotions_ls=[]
-    for i in range(10):
+    for i in range(len(text_chunks)):
       emotion=llm.invoke(get_emotion_polarity(text_chunks[i].page_content)).content
       emotion=ast.literal_eval(emotion)
       max_key = max(emotion, key=emotion.get)  # Get the key with the maximum value
@@ -298,7 +278,7 @@ if st.button("Analyze"):
   col1,col2=st.columns(2)
   with col1:
     ner_ls=[]
-    for i in range(10):
+    for i in range(len(text_chunks)):
       ner=llm.invoke(get_ner(text_chunks[i].page_content)).content
       ner_ls.extend(ast.literal_eval(ner).values())
     # Convert the ner dictionary to a Pandas DataFrame for long-form data
@@ -320,7 +300,7 @@ if st.button("Analyze"):
     readability_score=0
     quality_score=0
     coherence=0
-    for i in range(30):    
+    for i in range(len(text_chunks)):    
       text_metrics=llm.invoke(get_text_metrics(text_chunks[i].page_content)).content
       text_metrics=ast.literal_eval(text_metrics)
       readability_score+=text_metrics["Readability Score"]
@@ -333,7 +313,7 @@ if st.button("Analyze"):
             
     sns.set(style="whitegrid")
     fig, ax = plt.subplots(figsize=(7, 5))
-    sns.barplot(x=["Readability Score","Quality Score","Coherence"],y=[readability_score/10,quality_score/10,coherence/10],hue=["Readability Score","Quality Score","Coherence"],ax=ax)
+    sns.barplot(x=["Readability Score","Quality Score","Coherence"],y=[readability_score/len(text_chunks),quality_score/len(text_chunks),coherence/len(text_chunks)],hue=["Readability Score","Quality Score","Coherence"],ax=ax)
     ax.set_xticklabels(ax.get_xticklabels(), rotation=90)
     # plt.show()
     ax.set_title("Text Metrics")
