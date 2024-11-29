@@ -122,14 +122,15 @@ if file!=None:
   file_extension=file_name.split(".")[-1]
 
 # # if st.button("upload"):
-#   if file_extension=="xlsx" or file_extension=="csv":
-#       column_name=st.text_input("Write column name which contains the Text")
-#       if file_extension=="xlsx" and column_name!="":
-#           df=pd.read_excel(file)
-#           df_text="".join(df[column_name.strip()].values)
-#           with open("df_text.txt","w") as f:
-#               f.write(df_text)
-#       if file_extension=="csv" and column_name!="":
+  if file_extension=="xlsx" or file_extension=="csv":
+    column_name=st.text_input("Write column name which contains the Text")
+    df=pd.read_excel(file)
+    df_text="".join(df[column_name.strip()].values)
+    with open("df_text.txt","w") as f:
+        f.write(df_text)
+
+  
+  # if file_extension=="csv" and column_name!="":
 #           df=pd.read_csv(file)
 #           df_text="".join(df[column_name.strip()].values)
 #           with open("df_text.txt","w") as f:
@@ -145,8 +146,8 @@ if file!=None:
 #               # len(text_chunks)
   
   if file_extension=="txt":
-  #   with open(file.name) as f:
-  #     f=f.read()
+    with open(file.name, mode='wb') as w:
+        w.write(file.getvalue())
     loader = TextLoader(file.name)
     loader.load()
     # # split the extracted data into text chunks using the text_splitter, which splits the text based on the specified number of characters and overlap
